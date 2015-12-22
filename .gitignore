@@ -1,0 +1,16 @@
+# Ignore Build Results
+build/*
+bin/*
+dirFile
+
+# Debug Stuff
+*.dSYM
+
+# Mac Specific Stuff
+.DS_STORE
+
+# Vim stuff
+*.swp
+
+# astyle stuff
+*.orig
