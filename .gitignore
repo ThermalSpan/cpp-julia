@@ -14,3 +14,7 @@ dirFile
 
 # astyle stuff
 *.orig
+
+# images
+*.tiff
+*.tif
