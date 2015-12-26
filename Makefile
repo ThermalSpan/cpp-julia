@@ -8,22 +8,14 @@ CFLAGS  = -c -std=c++11 -stdlib=libc++ -Wall -I/usr/local/include
 LFLAGS  = -L/usr/local/lib -ltiff
 
 # Directories
-TEMPDIRS = build bin build/buddha build/Math build/fractal build/Tiff
+TEMPDIRS = build bin 
 
 # File/s
-FRACTALFILES = main
-MATHFILES = 
-TIFFILES = tiffWrapper
+FILES = main tiffWrapper AtomicGrid
 
 # Derived File Lists
-MATHSRC = $(MATHFILES:%=src/Math/%.cpp)
-MATHOBJ = $(MATHFILES:%=build/Math/%.o)
-
-FRACTALSRC = $(FRACTALFILES:%=src/fractal/%.cpp)
-FRACTALOBJ = $(FRACTALFILES:%=build/fractal/%.o)
-
-TIFFSRC = $(TIFFILES:%=src/Tiff/%.cpp)
-TIFFOBJ = $(TIFFILES:%=build/Tiff/%.o)
+SRC = $(FILES:%=src/%.cpp)
+OBJ = $(FILES:%=build/%.o)
 
 # Targets
 all: dirFile bin/mandelbrot
@@ -37,14 +29,10 @@ dirFile:
 build/%.o : src/%.cpp
 	$(CC) $(CFLAGS) -g $< -o $@
 
-bin/mandelbrot : $(FRACTALOBJ) $(TIFFOBJ)
+bin/mandelbrot : $(OBJ) 
 	$(CC) $(LFLAGS) $^ -o bin/mandelbrot
 
 # Phone commands
-.PHONY: install
-install: bin/buddha
-	cp bin/buddha Tests/buddha
-
 .PHONY: clean
 clean:
 	rm -f -r build bin dirFile Tests/buddha Tests/buddha.dSYM

@@ -41,7 +41,7 @@ void Image::exportTiff (const std::string &filename, const ImageData &data) {
     TIFFSetField(out, TIFFTAG_ROWSPERSTRIP, TIFFDefaultStripSize (out, width * channels));
 
     for (uint32 row = 0; row < height; row++) {
-        memcpy (buf, &image[(height - row - 1) * lineBytes], lineBytes);
+        memcpy (buf, &image[row * lineBytes], lineBytes);
         if (TIFFWriteScanline (out, buf, row, 0) < 0) {
             break;
         }
